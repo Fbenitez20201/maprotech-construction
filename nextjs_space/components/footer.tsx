@@ -196,19 +196,19 @@ export default function Footer() {
       </div>
 
       {/* Large Logo Section */}
-      <div className="bg-black py-12 overflow-hidden">
+      <div className="bg-black pb-16 pt-8 overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="max-w-[1400px] mx-auto px-6 lg:px-10"
+          className="max-w-[1200px] mx-auto px-6 lg:px-10"
         >
-          <div className="relative w-full h-[200px] md:h-[300px] lg:h-[400px]">
+          <div className="relative w-full aspect-[3/1]">
             <Image
-              src="/images/logo.png"
-              alt="Maprotech Construction LLC"
+              src="/images/logo-footer.png"
+              alt="Maprotech Construction LLC - Building Dreams"
               fill
-              className="object-contain opacity-30"
+              className="object-contain opacity-40"
             />
           </div>
         </motion.div>
