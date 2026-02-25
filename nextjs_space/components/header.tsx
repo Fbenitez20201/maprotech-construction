@@ -45,13 +45,13 @@ export default function Header() {
           <div className="flex items-center justify-between h-20">
             {/* Logo - switches between white and color versions */}
             <Link href="/" className="relative h-14 w-44">
-              {/* White logo - visible when not scrolled */}
+              {/* White/Gray logo - visible when not scrolled */}
               <Image
-                src="/images/logo.png"
+                src="/images/logo-white.png"
                 alt="Maprotech Construction LLC"
                 fill
-                className={`object-contain transition-all duration-300 ${
-                  isScrolled ? 'opacity-0' : 'opacity-100 brightness-0 invert'
+                className={`object-contain object-left transition-all duration-300 ${
+                  isScrolled ? 'opacity-0' : 'opacity-100'
                 }`}
                 priority
               />
@@ -60,7 +60,7 @@ export default function Header() {
                 src="/images/logo-color.png"
                 alt="Maprotech Construction LLC"
                 fill
-                className={`object-contain transition-all duration-300 ${
+                className={`object-contain object-left transition-all duration-300 ${
                   isScrolled ? 'opacity-100' : 'opacity-0'
                 }`}
                 priority
@@ -113,10 +113,10 @@ export default function Header() {
               <div className="flex items-center justify-between h-20">
                 <Link href="/" className="relative h-14 w-44">
                   <Image
-                    src="/images/logo.png"
+                    src="/images/logo-white.png"
                     alt="Maprotech Construction LLC"
                     fill
-                    className="object-contain brightness-0 invert"
+                    className="object-contain object-left"
                   />
                 </Link>
                 <div className="flex items-center gap-3">
