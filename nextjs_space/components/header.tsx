@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useI18n } from '@/lib/i18n';
 
 export default function Header() {
@@ -42,14 +43,17 @@ export default function Header() {
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-20">
-            {/* Logo - Text style like Aestoria */}
-            <Link
-              href="/"
-              className={`text-xl font-medium tracking-tight transition-colors duration-300 ${
-                isScrolled ? 'text-[#1a1a1a]' : 'text-white'
-              }`}
-            >
-              Maprotech
+            {/* Logo */}
+            <Link href="/" className="relative h-14 w-40">
+              <Image
+                src="/images/logo.png"
+                alt="Maprotech Construction LLC"
+                fill
+                className={`object-contain transition-all duration-300 ${
+                  isScrolled ? 'brightness-0' : 'brightness-0 invert'
+                }`}
+                priority
+              />
             </Link>
 
             {/* Right side - Language Toggle + Menu */}
@@ -96,9 +100,14 @@ export default function Header() {
             <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-full flex flex-col">
               {/* Menu Header */}
               <div className="flex items-center justify-between h-20">
-                <span className="text-xl font-medium tracking-tight text-white">
-                  Maprotech
-                </span>
+                <Link href="/" className="relative h-14 w-40">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Maprotech Construction LLC"
+                    fill
+                    className="object-contain brightness-0 invert"
+                  />
+                </Link>
                 <div className="flex items-center gap-3">
                   {/* Language Toggle in Menu */}
                   <button
