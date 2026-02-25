@@ -4,19 +4,15 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import { Star, Plus } from 'lucide-react';
+import { useI18n } from '@/lib/i18n';
+import Link from 'next/link';
 
 export default function BentoGrid() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const { t } = useI18n();
 
   return (
     <section ref={ref} className="py-20 lg:py-28 bg-[#f5f3f0]">
@@ -29,7 +25,7 @@ export default function BentoGrid() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-[#1a1a1a] leading-[1.15] tracking-tight"
           >
-            From quiet corners to bold statements — <span className="text-[#b8b5b0]">construction that connects</span>
+            {t('bento.heading1')} <span className="text-[#b8b5b0]">{t('bento.heading2')}</span>
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -38,14 +34,14 @@ export default function BentoGrid() {
             className="flex flex-col justify-end gap-5"
           >
             <p className="text-[#666] text-[15px] leading-relaxed max-w-sm">
-              With a seamless process and attention to detail, we turn ideas into beautiful, livable realities.
+              {t('bento.description')}
             </p>
-            <button
-              onClick={() => scrollToSection('#contact')}
+            <Link
+              href="/contact"
               className="px-6 py-3 bg-[#1a1a1a] text-white text-sm font-medium rounded-full hover:bg-[#333] transition-colors w-fit"
             >
-              Get a Quote
-            </button>
+              {t('hero.cta')}
+            </Link>
           </motion.div>
         </div>
 
@@ -121,9 +117,9 @@ export default function BentoGrid() {
                 </div>
               </div>
               <div>
-                <h4 className="text-white font-medium text-base mb-2">Meticulous detail</h4>
+                <h4 className="text-white font-medium text-base mb-2">{t('bento.feature1.title')}</h4>
                 <p className="text-white/70 text-[12px] leading-relaxed">
-                  We've delivered 50+ projects that help companies generate real results.
+                  {t('bento.feature1.desc')}
                 </p>
               </div>
             </div>
@@ -167,9 +163,9 @@ export default function BentoGrid() {
                 </div>
               </div>
               <div>
-                <h4 className="text-white font-medium text-base mb-2">Sustainable by Nature</h4>
+                <h4 className="text-white font-medium text-base mb-2">{t('bento.feature2.title')}</h4>
                 <p className="text-white/70 text-[12px] leading-relaxed">
-                  Eco-friendly building practices and materials for a better future.
+                  {t('bento.feature2.desc')}
                 </p>
               </div>
             </div>
@@ -212,9 +208,9 @@ export default function BentoGrid() {
                 </div>
               </div>
               <div>
-                <h4 className="text-white font-medium text-base mb-2">Beauty with purpose</h4>
+                <h4 className="text-white font-medium text-base mb-2">{t('bento.feature3.title')}</h4>
                 <p className="text-white/70 text-[12px] leading-relaxed">
-                  Expert craftsmanship that combines aesthetics with functionality.
+                  {t('bento.feature3.desc')}
                 </p>
               </div>
             </div>

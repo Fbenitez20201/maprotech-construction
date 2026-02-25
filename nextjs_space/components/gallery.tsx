@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useI18n } from '@/lib/i18n';
 
 const images = [
   { src: '/images/projects/kitchen2.jpg', alt: 'Kitchen Remodel', category: 'Kitchen' },
@@ -23,6 +24,7 @@ export default function Gallery() {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const { t } = useI18n();
 
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -32,8 +34,9 @@ export default function Gallery() {
     offset: ['start end', 'end start'],
   });
 
-  const x1 = useTransform(scrollYProgress, [0, 1], ['0%', '-20%']);
-  const x2 = useTransform(scrollYProgress, [0, 1], ['-20%', '0%']);
+  // Adjusted transforms for better coverage - start more to the right
+  const x1 = useTransform(scrollYProgress, [0, 1], ['10%', '-25%']);
+  const x2 = useTransform(scrollYProgress, [0, 1], ['-10%', '15%']);
 
   const row1 = images.slice(0, 5);
   const row2 = images.slice(4, 9);
@@ -58,19 +61,19 @@ export default function Gallery() {
             className="text-center"
           >
             <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium text-[#666] mb-4">
-              Gallery
+              {t('gallery.badge')}
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-[#1a1a1a] tracking-tight mb-4">
-              See our work in action
+              {t('gallery.title')}
             </h2>
             <p className="text-[#666] text-[15px] max-w-lg mx-auto">
-              Browse through our portfolio of completed projects and get inspired for your next renovation.
+              {t('gallery.description')}
             </p>
           </motion.div>
         </div>
 
-        {/* Row 1 - moves left */}
-        <motion.div style={{ x: x1 }} className="flex gap-4 mb-4 pl-4">
+        {/* Row 1 - moves left, starts from right */}
+        <motion.div style={{ x: x1 }} className="flex gap-4 mb-4 justify-center">
           {row1.map((image, index) => (
             <motion.div
               key={`row1-${index}`}
@@ -97,8 +100,8 @@ export default function Gallery() {
           ))}
         </motion.div>
 
-        {/* Row 2 - moves right */}
-        <motion.div style={{ x: x2 }} className="flex gap-4 pl-4">
+        {/* Row 2 - moves right, starts from left */}
+        <motion.div style={{ x: x2 }} className="flex gap-4 justify-center">
           {row2.map((image, index) => (
             <motion.div
               key={`row2-${index}`}

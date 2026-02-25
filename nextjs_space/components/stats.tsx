@@ -2,41 +2,32 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useI18n } from '@/lib/i18n';
 
-const stats = [
-  { value: 15, suffix: '%', label: 'Ad impressions managed' },
-  { value: 27, suffix: '+', label: 'Successful projects launched' },
-  { value: 15, suffix: '%', label: 'Client satisfaction rate' },
-  { value: 50, suffix: 'k+', label: 'Monthly website driven through SEO' },
-];
-
-function CountUp({ end, suffix, inView }: { end: number; suffix: string; inView: boolean }) {
+function CountUp({ end, duration = 2000, inView }: { end: number; duration?: number; inView: boolean }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (inView) {
-      let start = 0;
-      const duration = 2000;
-      const increment = end / (duration / 16);
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(start));
-        }
-      }, 16);
-      return () => clearInterval(timer);
-    }
-  }, [inView, end]);
+    if (!inView) return;
 
-  return (
-    <span>
-      {count}{suffix}
-    </span>
-  );
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration, inView]);
+
+  return <>{count.toLocaleString()}</>;
 }
 
 export default function Stats() {
@@ -44,23 +35,32 @@ export default function Stats() {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const { t } = useI18n();
+
+  const stats = [
+    { value: 2500000, suffix: '+', label: t('stats.impressions') },
+    { value: 50, suffix: '+', label: t('stats.projects') },
+    { value: 99, suffix: '%', label: t('stats.satisfaction') },
+    { value: 10000, suffix: '+', label: t('stats.traffic') },
+  ];
 
   return (
-    <section ref={ref} className="py-16 bg-white">
+    <section ref={ref} className="py-20 lg:py-28 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-left"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="text-center"
             >
-              <p className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-[#1a1a1a] mb-2 tracking-tight">
-                <CountUp end={stat.value} suffix={stat.suffix} inView={inView} />
+              <p className="text-4xl md:text-5xl lg:text-6xl font-medium text-[#1a1a1a] mb-2">
+                <CountUp end={stat.value} inView={inView} />
+                {stat.suffix}
               </p>
-              <p className="text-[#888] text-[13px]">{stat.label}</p>
+              <p className="text-[#888] text-[13px] lg:text-sm">{stat.label}</p>
             </motion.div>
           ))}
         </div>

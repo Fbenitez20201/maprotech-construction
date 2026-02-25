@@ -3,49 +3,71 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Plus, Minus, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
+import { useI18n } from '@/lib/i18n';
 
 const services = [
   {
     num: '01',
     title: 'Painting',
+    titleEs: 'Pintura',
     subtitle: 'Interior & exterior finishes',
+    subtitleEs: 'Acabados interiores y exteriores',
     image: '/images/services/painting.png',
     description: 'Transform your space with our professional painting services. We use premium paints and techniques for flawless, long-lasting finishes on any surface.',
+    descriptionEs: 'Transforma tu espacio con nuestros servicios profesionales de pintura. Usamos pinturas y técnicas premium para acabados impecables y duraderos en cualquier superficie.',
     features: ['Interior painting', 'Exterior painting', 'Cabinet refinishing', 'Deck staining', 'Color consultation'],
+    featuresEs: ['Pintura interior', 'Pintura exterior', 'Refinado de gabinetes', 'Tinte de terrazas', 'Consulta de colores'],
   },
   {
     num: '02',
     title: 'Roofing',
+    titleEs: 'Techos',
     subtitle: 'Durable roof solutions',
+    subtitleEs: 'Soluciones de techos duraderos',
     image: '/images/services/roofing.png',
     description: 'Protect your home with our expert roofing services. From repairs to complete replacements, we ensure your roof stands strong against the elements.',
+    descriptionEs: 'Protege tu hogar con nuestros servicios expertos de techos. Desde reparaciones hasta reemplazos completos, aseguramos que tu techo resista los elementos.',
     features: ['Roof installation', 'Roof repair', 'Shingle replacement', 'Gutter installation', 'Roof inspection'],
+    featuresEs: ['Instalación de techos', 'Reparación de techos', 'Reemplazo de tejas', 'Instalación de canaletas', 'Inspección de techos'],
   },
   {
     num: '03',
     title: 'Tile Work',
+    titleEs: 'Azulejos',
     subtitle: 'Precision tile installation',
+    subtitleEs: 'Instalación de azulejos de precisión',
     image: '/images/services/tile.png',
     description: 'Elevate your floors, walls, and surfaces with our precision tile installation. From classic ceramics to modern large-format tiles.',
+    descriptionEs: 'Eleva tus pisos, paredes y superficies con nuestra instalación de azulejos de precisión. Desde cerámicas clásicas hasta azulejos modernos de gran formato.',
     features: ['Floor tiling', 'Backsplash installation', 'Shower tiling', 'Outdoor tile work', 'Tile repair'],
+    featuresEs: ['Azulejos de piso', 'Instalación de backsplash', 'Azulejos de ducha', 'Azulejos exteriores', 'Reparación de azulejos'],
   },
   {
     num: '04',
     title: 'Plumbing',
+    titleEs: 'Plomería',
     subtitle: 'Complete plumbing services',
+    subtitleEs: 'Servicios completos de plomería',
     image: '/images/services/plumbing.png',
     description: 'Keep your water flowing smoothly with our comprehensive plumbing services. From fixtures to full system installations.',
+    descriptionEs: 'Mantén el agua fluyendo sin problemas con nuestros servicios integrales de plomería. Desde accesorios hasta instalaciones completas de sistemas.',
     features: ['Fixture installation', 'Pipe repair', 'Water heater service', 'Drain cleaning', 'Bathroom remodel plumbing'],
+    featuresEs: ['Instalación de accesorios', 'Reparación de tuberías', 'Servicio de calentador de agua', 'Limpieza de desagües', 'Plomería de remodelación de baños'],
   },
   {
     num: '05',
     title: 'Remodeling',
+    titleEs: 'Remodelación',
     subtitle: 'Full home transformations',
+    subtitleEs: 'Transformaciones completas del hogar',
     image: '/images/services/remodeling.png',
     description: 'Reimagine your living space with our complete remodeling services. We handle everything from design to final touches.',
+    descriptionEs: 'Reimagina tu espacio habitable con nuestros servicios completos de remodelación. Manejamos todo, desde el diseño hasta los toques finales.',
     features: ['Kitchen remodeling', 'Bathroom renovation', 'Basement finishing', 'Room additions', 'Open concept conversions'],
+    featuresEs: ['Remodelación de cocina', 'Renovación de baño', 'Acabado de sótano', 'Adiciones de habitaciones', 'Conversiones de concepto abierto'],
   },
 ];
 
@@ -54,16 +76,13 @@ export default function Services() {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const { t, language } = useI18n();
 
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
-  };
-
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -77,10 +96,10 @@ export default function Services() {
           className="mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-white mb-4 tracking-tight">
-            Our expertise
+            {t('services.title')}
           </h2>
           <p className="text-[#888] text-[15px] max-w-md">
-            Comprehensive construction services tailored to bring your vision to life.
+            {t('services.description')}
           </p>
         </motion.div>
 
@@ -112,7 +131,7 @@ export default function Services() {
                 }`}>
                   <Image
                     src={service.image}
-                    alt={service.title}
+                    alt={language === 'es' ? service.titleEs : service.title}
                     fill
                     className="object-cover"
                   />
@@ -121,9 +140,11 @@ export default function Services() {
                 {/* Content */}
                 <div className="flex-1">
                   <h3 className="text-xl md:text-2xl font-medium text-white group-hover:text-[#aaa] transition-colors">
-                    {service.title}
+                    {language === 'es' ? service.titleEs : service.title}
                   </h3>
-                  <p className="text-[#555] text-sm mt-0.5">{service.subtitle}</p>
+                  <p className="text-[#555] text-sm mt-0.5">
+                    {language === 'es' ? service.subtitleEs : service.subtitle}
+                  </p>
                 </div>
 
                 {/* Button */}
@@ -156,7 +177,7 @@ export default function Services() {
                         <div className="relative aspect-video rounded-2xl overflow-hidden">
                           <Image
                             src={service.image}
-                            alt={service.title}
+                            alt={language === 'es' ? service.titleEs : service.title}
                             fill
                             className="object-cover"
                           />
@@ -165,26 +186,24 @@ export default function Services() {
                         {/* Details */}
                         <div className="flex flex-col justify-center">
                           <p className="text-[#aaa] text-[15px] leading-relaxed mb-6">
-                            {service.description}
+                            {language === 'es' ? service.descriptionEs : service.description}
                           </p>
                           <ul className="space-y-2 mb-6">
-                            {service.features.map((feature, i) => (
+                            {(language === 'es' ? service.featuresEs : service.features).map((feature, i) => (
                               <li key={i} className="text-[#777] text-sm flex items-center gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
                                 {feature}
                               </li>
                             ))}
                           </ul>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              scrollToContact();
-                            }}
+                          <Link
+                            href="/contact"
+                            onClick={(e) => e.stopPropagation()}
                             className="inline-flex items-center gap-2 text-white text-sm font-medium hover:text-[#aaa] transition-colors group/btn"
                           >
-                            Get a Quote
+                            {t('services.getQuote')}
                             <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>

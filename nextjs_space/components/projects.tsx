@@ -1,47 +1,60 @@
 'use client';
 
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
+import { useI18n } from '@/lib/i18n';
 
 const projects = [
   {
     title: 'Modern Kitchen',
+    titleEs: 'Cocina Moderna',
     date: 'Feb 2026',
     image: '/images/projects/kitchen2.jpg',
     category: 'Kitchen',
+    categoryEs: 'Cocina',
   },
   {
     title: 'Elegant Bathroom',
+    titleEs: 'Baño Elegante',
     date: 'Jan 2026',
     image: '/images/features/bathroom_reno.png',
     category: 'Bathroom',
+    categoryEs: 'Baño',
   },
   {
     title: 'Contemporary Kitchen',
+    titleEs: 'Cocina Contemporánea',
     date: 'Dec 2025',
     image: '/images/projects/kitchen1.jpg',
     category: 'Kitchen',
+    categoryEs: 'Cocina',
   },
   {
     title: 'Classic Design',
+    titleEs: 'Diseño Clásico',
     date: 'Nov 2025',
     image: '/images/projects/kitchen3.jpg',
     category: 'Remodeling',
+    categoryEs: 'Remodelación',
   },
   {
     title: 'Luxury Bathroom',
+    titleEs: 'Baño de Lujo',
     date: 'Oct 2025',
     image: '/images/services/tile.png',
     category: 'Bathroom',
+    categoryEs: 'Baño',
   },
   {
     title: 'Modern Remodel',
+    titleEs: 'Remodelación Moderna',
     date: 'Sep 2025',
     image: '/images/services/remodeling.png',
     category: 'Remodeling',
+    categoryEs: 'Remodelación',
   },
 ];
 
@@ -58,26 +71,24 @@ export default function Projects() {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const { t, language } = useI18n();
 
   const sectionRef = useRef<HTMLElement>(null);
   const [carouselWidth, setCarouselWidth] = useState(0);
 
   useEffect(() => {
-    // Calculate total carousel width needed
-    const cardWidth = 500; // lg:w-[500px]
-    const gap = 16; // gap-4
+    const cardWidth = 500;
+    const gap = 16;
     const totalWidth = projects.length * (cardWidth + gap) - gap;
     const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1400;
     setCarouselWidth(Math.max(0, totalWidth - viewportWidth + 100));
   }, []);
 
-  // Scroll progress for the pinned section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
 
-  // Transform scroll progress to horizontal movement
   const x = useTransform(scrollYProgress, [0, 1], [0, -carouselWidth]);
 
   return (
@@ -85,12 +96,10 @@ export default function Projects() {
       id="projects" 
       ref={sectionRef} 
       className="relative bg-white"
-      style={{ height: `${150 + (carouselWidth / 3)}vh` }} // Dynamic height for scroll pinning
+      style={{ height: `${150 + (carouselWidth / 3)}vh` }}
     >
-      {/* Sticky container */}
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-10">
         <div ref={ref} className="max-w-[1400px] mx-auto px-6 lg:px-10 w-full">
-          {/* Header */}
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -98,7 +107,7 @@ export default function Projects() {
               transition={{ duration: 0.6 }}
               className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-[#1a1a1a] tracking-tight"
             >
-              Our projects
+              {t('projects.title')}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 30 }}
@@ -106,11 +115,10 @@ export default function Projects() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-[#666] text-[15px] leading-relaxed max-w-sm lg:text-right"
             >
-              Each project is a reflection of our construction philosophy—intentional, timeless, and tailored.
+              {t('projects.description')}
             </motion.p>
           </div>
 
-          {/* Client Logos */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
@@ -129,7 +137,6 @@ export default function Projects() {
           </motion.div>
         </div>
 
-        {/* Projects Carousel with scroll-linked horizontal movement */}
         <div className="overflow-hidden">
           <motion.div
             style={{ x }}
@@ -146,17 +153,15 @@ export default function Projects() {
                 <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden mb-4">
                   <Image
                     src={project.image}
-                    alt={project.title}
+                    alt={language === 'es' ? project.titleEs : project.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  {/* Category tag */}
                   <div className="absolute top-4 left-4">
                     <span className="bg-white/90 backdrop-blur-sm text-[#1a1a1a] text-xs font-medium px-3 py-1.5 rounded-full">
-                      {project.category}
+                      {language === 'es' ? project.categoryEs : project.category}
                     </span>
                   </div>
-                  {/* Arrow button on hover */}
                   <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center">
                       <ChevronRight className="w-5 h-5 text-[#1a1a1a]" />
@@ -165,21 +170,22 @@ export default function Projects() {
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="text-[#888] text-[13px]">{project.date}</span>
-                  <h3 className="text-[#1a1a1a] font-medium text-base">{project.title}</h3>
+                  <h3 className="text-[#1a1a1a] font-medium text-base">
+                    {language === 'es' ? project.titleEs : project.title}
+                  </h3>
                 </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div 
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[#888] text-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
         >
-          <span>Scroll to explore</span>
+          <span>{t('projects.scroll')}</span>
           <ChevronRight className="w-4 h-4 animate-pulse" />
         </motion.div>
       </div>

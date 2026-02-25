@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { headers } from 'next/headers';
+import { I18nProvider } from '@/lib/i18n';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -10,29 +10,35 @@ const inter = Inter({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const headersList = headers();
-  const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
-  const protocol = host.includes('localhost') ? 'http' : 'https';
-  const baseUrl = host ? `${protocol}://${host}` : process.env.NEXTAUTH_URL || 'http://localhost:3000';
-
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://maprotechsas.abacusai.app';
+  
   return {
     metadataBase: new URL(baseUrl),
     title: 'Maprotech Construction LLC | Building Dreams',
-    description: 'Transforming Ideas into Reality. Professional construction services in Houston, TX including painting, roofing, remodeling, tile work, and more.',
-    keywords: 'construction, remodeling, renovation, Houston, Texas, painting, roofing, tile work, plumbing, carpentry',
+    description: 'Professional construction services in Houston, TX. Specializing in painting, roofing, tile work, plumbing, and full home remodeling. Quality craftsmanship guaranteed.',
+    keywords: ['construction', 'remodeling', 'painting', 'roofing', 'tile work', 'plumbing', 'Houston', 'Texas', 'home improvement'],
     openGraph: {
-      title: 'Maprotech Construction LLC | Building Dreams',
-      description: 'Transforming Ideas into Reality. Professional construction services in Houston, TX.',
-      images: ['/og-image.png'],
+      title: 'Maprotech Construction LLC | Building Dreams Into Reality',
+      description: 'Professional construction services in Houston, TX. Quality craftsmanship guaranteed.',
       type: 'website',
+      locale: 'en_US',
+      images: [
+        {
+          url: '/images/hero-bg.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Maprotech Construction',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Maprotech Construction LLC | Building Dreams',
-      description: 'Transforming Ideas into Reality. Professional construction services in Houston, TX.',
+      title: 'Maprotech Construction LLC',
+      description: 'Professional construction services in Houston, TX.',
+      images: ['/images/hero-bg.jpg'],
     },
     icons: {
-      icon: '/favicon.svg',
+      icon: '/favicon.ico',
       apple: '/apple-touch-icon.png',
     },
   };
@@ -44,12 +50,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={inter.variable}>
       <head>
         <script src="https://apps.abacus.ai/chatllm/appllm-lib.js" />
       </head>
-      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
-        {children}
+      <body className={`font-sans antialiased bg-white text-dark`}>
+        <I18nProvider>
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

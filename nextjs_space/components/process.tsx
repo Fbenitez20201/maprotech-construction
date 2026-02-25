@@ -3,39 +3,41 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Phone, ClipboardList, Hammer, CheckCircle } from 'lucide-react';
-
-const steps = [
-  {
-    num: '01',
-    title: 'Consultation',
-    description: 'We start with a free consultation to understand your vision, needs, and budget.',
-    icon: Phone,
-  },
-  {
-    num: '02',
-    title: 'Planning & Quote',
-    description: 'Our team creates a detailed plan and provides a transparent, no-obligation estimate.',
-    icon: ClipboardList,
-  },
-  {
-    num: '03',
-    title: 'Construction',
-    description: 'Our skilled craftsmen bring your vision to life with quality workmanship.',
-    icon: Hammer,
-  },
-  {
-    num: '04',
-    title: 'Final Walkthrough',
-    description: 'We ensure every detail meets your expectations before project completion.',
-    icon: CheckCircle,
-  },
-];
+import { useI18n } from '@/lib/i18n';
 
 export default function Process() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  const { t } = useI18n();
+
+  const steps = [
+    {
+      num: '01',
+      title: t('process.step1.title'),
+      description: t('process.step1.desc'),
+      icon: Phone,
+    },
+    {
+      num: '02',
+      title: t('process.step2.title'),
+      description: t('process.step2.desc'),
+      icon: ClipboardList,
+    },
+    {
+      num: '03',
+      title: t('process.step3.title'),
+      description: t('process.step3.desc'),
+      icon: Hammer,
+    },
+    {
+      num: '04',
+      title: t('process.step4.title'),
+      description: t('process.step4.desc'),
+      icon: CheckCircle,
+    },
+  ];
 
   return (
     <section ref={ref} className="py-20 lg:py-28 bg-[#f5f3f0]">
@@ -48,13 +50,13 @@ export default function Process() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium text-[#666] mb-4">
-            How We Work
+            {t('process.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-[#1a1a1a] tracking-tight mb-4">
-            Our simple 4-step process
+            {t('process.title')}
           </h2>
           <p className="text-[#666] text-[15px] max-w-lg mx-auto">
-            We&apos;ve streamlined our process to make your construction project as smooth and stress-free as possible.
+            {t('process.description')}
           </p>
         </motion.div>
 

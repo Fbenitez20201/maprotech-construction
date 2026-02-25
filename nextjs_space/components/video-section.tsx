@@ -4,31 +4,14 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
-
-const teamImages = [
-  {
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop',
-    text: 'A team that brings clarity to every detail',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=600&fit=crop',
-    text: 'Experts who translate vision into space',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&fit=crop',
-    text: 'Craftsmen dedicated to perfection',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop',
-    text: 'Partners in building your dream',
-  },
-];
+import { useI18n } from '@/lib/i18n';
 
 export default function VideoSection() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  const { t } = useI18n();
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -69,13 +52,13 @@ export default function VideoSection() {
             className="flex flex-col gap-8"
           >
             <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-[#1a1a1a] leading-[1.15] tracking-tight">
-              Construction that speaks before you ever say a word
+              {t('video.title')}
             </h2>
 
             {/* Quote Card */}
             <div className="bg-white rounded-[20px] p-6">
               <p className="text-[#444] text-[14px] leading-relaxed italic mb-4">
-                "The team at MaProTech exceeded all expectations. Their work transformed our home completely."
+                "{t('video.quote')}"
               </p>
               <div className="flex items-center gap-2">
                 <span className="text-[#1a1a1a] text-sm font-medium">Carlos R.</span>
@@ -88,33 +71,10 @@ export default function VideoSection() {
               onClick={() => scrollToSection('#contact')}
               className="px-6 py-3 bg-[#1a1a1a] text-white text-sm font-medium rounded-full hover:bg-[#333] transition-colors w-fit"
             >
-              Get a Quote
+              {t('hero.cta')}
             </button>
           </motion.div>
         </div>
-
-        {/* Team Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-16"
-        >
-          {teamImages.map((item, index) => (
-            <div key={index} className="relative aspect-[3/4] rounded-[20px] overflow-hidden group">
-              <Image
-                src={item.src}
-                alt={item.text}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <p className="text-white text-sm font-medium leading-snug">{item.text}</p>
-              </div>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

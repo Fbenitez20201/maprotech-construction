@@ -2,9 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Play } from 'lucide-react';
+import { useI18n } from '@/lib/i18n';
 
 export default function Hero() {
+  const { t } = useI18n();
+  
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -39,7 +41,7 @@ export default function Hero() {
             className="mb-6"
           >
             <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-white/20">
-              #1 Construction Company
+              {t('hero.badge')}
             </span>
           </motion.div>
 
@@ -50,9 +52,9 @@ export default function Hero() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-[1.1] mb-8 max-w-4xl"
           >
-            Building Dreams
+            {t('hero.title1')}
             <br />
-            Into Reality
+            {t('hero.title2')}
           </motion.h1>
 
           {/* CTA Button */}
@@ -63,62 +65,8 @@ export default function Hero() {
             onClick={() => scrollToSection('#contact')}
             className="px-8 py-3.5 bg-white text-dark text-sm font-medium rounded-full hover:bg-gray-100 transition-colors"
           >
-            Get a Quote
+            {t('hero.cta')}
           </motion.button>
-        </div>
-
-        {/* Bottom Content */}
-        <div className="pb-8 flex items-end justify-between">
-          {/* Trust Badge - Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex items-center gap-3"
-          >
-            <div className="flex -space-x-2">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="w-9 h-9 rounded-full border-2 border-white/80 bg-gray-300"
-                  style={{
-                    backgroundImage: `url(https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww + 30}.jpg)`,
-                    backgroundSize: 'cover',
-                  }}
-                />
-              ))}
-            </div>
-            <div className="text-white">
-              <p className="text-sm font-medium">Trusted by over</p>
-              <p className="text-sm font-medium">100+ clients</p>
-            </div>
-          </motion.div>
-
-          {/* Video Card - Right */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="hidden md:flex items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl p-2 pr-4 border border-white/20"
-          >
-            <div className="relative w-20 h-14 rounded-xl overflow-hidden">
-              <Image
-                src="/images/projects/kitchen2.jpg"
-                alt="Project preview"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="flex items-center gap-3">
-              <div>
-                <p className="text-white text-sm font-medium">Discover full</p>
-                <p className="text-white text-sm font-medium">video</p>
-              </div>
-              <button className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                <Play className="w-3.5 h-3.5 text-white fill-white" />
-              </button>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
