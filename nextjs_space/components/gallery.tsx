@@ -34,9 +34,9 @@ export default function Gallery() {
     offset: ['start end', 'end start'],
   });
 
-  // Adjusted transforms for better coverage - start more to the right
-  const x1 = useTransform(scrollYProgress, [0, 1], ['10%', '-25%']);
-  const x2 = useTransform(scrollYProgress, [0, 1], ['-10%', '15%']);
+  // Adjusted transforms for full coverage on large monitors - start far right
+  const x1 = useTransform(scrollYProgress, [0, 1], ['30%', '-40%']);
+  const x2 = useTransform(scrollYProgress, [0, 1], ['-30%', '30%']);
 
   const row1 = images.slice(0, 5);
   const row2 = images.slice(4, 9);
