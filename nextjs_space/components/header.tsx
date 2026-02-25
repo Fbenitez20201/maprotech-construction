@@ -43,14 +43,25 @@ export default function Header() {
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="relative h-14 w-40">
+            {/* Logo - switches between white and color versions */}
+            <Link href="/" className="relative h-14 w-44">
+              {/* White logo - visible when not scrolled */}
               <Image
                 src="/images/logo.png"
                 alt="Maprotech Construction LLC"
                 fill
                 className={`object-contain transition-all duration-300 ${
-                  isScrolled ? 'brightness-0' : 'brightness-0 invert'
+                  isScrolled ? 'opacity-0' : 'opacity-100 brightness-0 invert'
+                }`}
+                priority
+              />
+              {/* Color logo - visible when scrolled */}
+              <Image
+                src="/images/logo-color.png"
+                alt="Maprotech Construction LLC"
+                fill
+                className={`object-contain transition-all duration-300 ${
+                  isScrolled ? 'opacity-100' : 'opacity-0'
                 }`}
                 priority
               />
@@ -100,7 +111,7 @@ export default function Header() {
             <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-full flex flex-col">
               {/* Menu Header */}
               <div className="flex items-center justify-between h-20">
-                <Link href="/" className="relative h-14 w-40">
+                <Link href="/" className="relative h-14 w-44">
                   <Image
                     src="/images/logo.png"
                     alt="Maprotech Construction LLC"
