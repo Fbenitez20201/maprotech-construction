@@ -79,8 +79,8 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" ref={ref} className="section bg-dark">
-      <div className="container">
+    <section id="contact" ref={ref} className="py-20 lg:py-28 bg-[#1a1a1a]">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left - Contact Info */}
           <motion.div
@@ -88,35 +88,35 @@ export default function Contact() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="heading-lg text-white mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-white mb-5 tracking-tight leading-[1.15]">
               Let's talk about your project
             </h2>
-            <p className="text-gray-400 mb-10 max-w-md">
+            <p className="text-[#888] text-[15px] mb-10 max-w-md">
               Ready to transform your space? Contact us today for a free consultation and estimate.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {contactInfo.map((item, index) => (
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="bg-white/5 rounded-2xl p-5"
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
+                  className="bg-white/5 rounded-[16px] p-4"
                 >
-                  <item.icon className="w-5 h-5 text-gray-400 mb-3" />
-                  <p className="text-gray-400 text-sm mb-1">{item.label}</p>
+                  <item.icon className="w-4 h-4 text-[#666] mb-3" strokeWidth={1.5} />
+                  <p className="text-[#666] text-[12px] mb-1">{item.label}</p>
                   {item.href ? (
                     <a
                       href={item.href}
                       target={item.href.startsWith('http') ? '_blank' : undefined}
                       rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="text-white font-medium hover:text-gray-300 transition-colors"
+                      className="text-white font-medium text-sm hover:text-gray-300 transition-colors"
                     >
                       {item.value}
                     </a>
                   ) : (
-                    <p className="text-white font-medium">{item.value}</p>
+                    <p className="text-white font-medium text-sm">{item.value}</p>
                   )}
                 </motion.div>
               ))}
@@ -130,20 +130,20 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             {isSubmitted ? (
-              <div className="bg-white/5 rounded-3xl p-8 text-center">
-                <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-                <h3 className="text-xl font-medium text-white mb-2">Message Sent!</h3>
-                <p className="text-gray-400">We'll get back to you as soon as possible.</p>
+              <div className="bg-white/5 rounded-[20px] p-8 text-center h-full flex flex-col items-center justify-center">
+                <CheckCircle className="w-14 h-14 text-green-400 mx-auto mb-4" strokeWidth={1.5} />
+                <h3 className="text-lg font-medium text-white mb-2">Message Sent!</h3>
+                <p className="text-[#888] text-sm">We'll get back to you as soon as possible.</p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="mt-6 text-white underline hover:no-underline"
+                  className="mt-6 text-white text-sm underline hover:no-underline"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-white text-sm font-medium mb-2">Name</label>
                     <input
@@ -152,7 +152,7 @@ export default function Contact() {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="John"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-[#555] focus:outline-none focus:border-white/30 transition-colors"
                     />
                   </div>
                   <div>
@@ -163,7 +163,7 @@ export default function Contact() {
                       onChange={(e) => setFormData({ ...formData, lastname: e.target.value })}
                       placeholder="Doe"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-[#555] focus:outline-none focus:border-white/30 transition-colors"
                     />
                   </div>
                 </div>
@@ -176,7 +176,7 @@ export default function Contact() {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="john@gmail.com"
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-[#555] focus:outline-none focus:border-white/30 transition-colors"
                   />
                 </div>
 
@@ -188,7 +188,7 @@ export default function Contact() {
                     placeholder="Tell us how we can help you..."
                     required
                     rows={4}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors resize-none"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-[#555] focus:outline-none focus:border-white/30 transition-colors resize-none"
                   />
                 </div>
 
@@ -197,11 +197,11 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-white text-dark font-medium py-3 rounded-xl hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full bg-white text-[#1a1a1a] font-medium py-3 rounded-xl hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" />
                       Sending...
                     </>
                   ) : (

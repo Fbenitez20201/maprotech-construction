@@ -28,15 +28,15 @@ export default function About() {
   });
 
   return (
-    <section id="about" ref={ref} className="section bg-gray-50">
-      <div className="container">
+    <section id="about" ref={ref} className="py-20 lg:py-28 bg-[#f5f3f0]">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="heading-lg text-dark"
+            className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-[#1a1a1a] tracking-tight leading-[1.15]"
           >
             Meet the people behind<br />the process
           </motion.h2>
@@ -44,14 +44,14 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-body max-w-md"
+            className="text-[#666] text-[15px] leading-relaxed max-w-sm"
           >
             Exceptional construction is a team effort. We collaborate closely to bring thoughtful results that not only meet but exceed your expectations.
           </motion.p>
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {team.map((member, index) => (
             <motion.div
               key={member.name}
@@ -60,7 +60,7 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               className="group"
             >
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-4">
+              <div className="relative aspect-[3/4] rounded-[24px] overflow-hidden mb-4">
                 <div
                   className="absolute inset-0 bg-gray-200 transition-transform duration-500 group-hover:scale-105"
                   style={{
@@ -70,8 +70,8 @@ export default function About() {
                   }}
                 />
               </div>
-              <h3 className="text-lg font-medium text-dark">{member.name}</h3>
-              <p className="text-gray-500 text-sm">{member.role}</p>
+              <h3 className="text-[#1a1a1a] font-medium text-base">{member.name}</h3>
+              <p className="text-[#888] text-sm">{member.role}</p>
             </motion.div>
           ))}
         </div>
@@ -81,11 +81,11 @@ export default function About() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 flex flex-col md:flex-row md:items-center md:justify-between gap-6 p-8 bg-white rounded-3xl"
+          className="mt-14 flex flex-col md:flex-row md:items-center md:justify-between gap-6 p-6 bg-white rounded-[20px]"
         >
           <div>
-            <h3 className="text-xl font-medium text-dark mb-2">Join us in building better spaces</h3>
-            <p className="text-gray-500">Ready to build something meaningful together? Let's connect and turn ideas into impactful construction.</p>
+            <h3 className="text-[#1a1a1a] font-medium text-lg mb-1">Join us in building better spaces</h3>
+            <p className="text-[#888] text-[14px]">Ready to build something meaningful together? Let's connect and turn ideas into impactful construction.</p>
           </div>
           <a
             href="#contact"
@@ -93,7 +93,7 @@ export default function About() {
               e.preventDefault();
               document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="btn-primary whitespace-nowrap"
+            className="px-6 py-3 bg-[#1a1a1a] text-white text-sm font-medium rounded-full hover:bg-[#333] transition-colors whitespace-nowrap w-fit"
           >
             Join us now
           </a>

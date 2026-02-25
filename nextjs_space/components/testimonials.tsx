@@ -44,34 +44,34 @@ export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section ref={ref} className="section bg-white">
-      <div className="container">
+    <section ref={ref} className="py-20 lg:py-28 bg-white">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         {/* Header */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="heading-lg text-dark mb-12 max-w-2xl"
+          className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-[#1a1a1a] mb-12 tracking-tight max-w-2xl"
         >
-          Don't just listen to us—see what our clients have to say.
+          Don't just listen to us—<span className="text-[#b8b5b0]">see what our clients have to say.</span>
         </motion.h2>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.author}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`relative rounded-3xl overflow-hidden ${
-                index === activeIndex ? 'bg-dark' : 'bg-gray-50'
-              } transition-colors duration-300`}
+              className={`relative rounded-[20px] overflow-hidden cursor-pointer transition-all duration-300 ${
+                index === activeIndex ? 'bg-[#1a1a1a]' : 'bg-[#f5f3f0]'
+              }`}
               onMouseEnter={() => setActiveIndex(index)}
             >
               {index === activeIndex ? (
                 /* Active Card with Image */
-                <div className="relative h-full min-h-[400px]">
+                <div className="relative h-full min-h-[380px]">
                   <div
                     className="absolute inset-0"
                     style={{
@@ -80,36 +80,36 @@ export default function Testimonials() {
                       backgroundPosition: 'center',
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <p className="text-white font-medium">{testimonial.author}</p>
-                    <p className="text-white/60 text-sm">{testimonial.role}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <p className="text-white font-medium text-sm">{testimonial.author}</p>
+                    <p className="text-white/60 text-xs">{testimonial.role}</p>
                   </div>
                 </div>
               ) : (
                 /* Inactive Card with Quote */
-                <div className="p-6 flex flex-col justify-between h-full min-h-[400px]">
+                <div className="p-5 flex flex-col justify-between h-full min-h-[380px]">
                   <div>
-                    <div className="flex gap-1 mb-4">
+                    <div className="flex gap-0.5 mb-4">
                       {Array.from({ length: testimonial.rating }).map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#e8c547] text-[#e8c547]" />
                       ))}
                     </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-[#444] text-[13px] leading-relaxed">
                       {testimonial.quote}
                     </p>
                   </div>
                   <div className="flex items-center gap-3 mt-6">
                     <div
-                      className="w-10 h-10 rounded-full bg-gray-200"
+                      className="w-9 h-9 rounded-full bg-gray-200"
                       style={{
                         backgroundImage: `url(${testimonial.image})`,
                         backgroundSize: 'cover',
                       }}
                     />
                     <div>
-                      <p className="text-sm font-medium text-dark">{testimonial.author}</p>
-                      <p className="text-xs text-gray-500">{testimonial.role}</p>
+                      <p className="text-[13px] font-medium text-[#1a1a1a]">{testimonial.author}</p>
+                      <p className="text-[11px] text-[#888]">{testimonial.role}</p>
                     </div>
                   </div>
                 </div>

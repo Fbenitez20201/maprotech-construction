@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -37,33 +36,29 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
+          isScrolled ? 'bg-white/95 backdrop-blur-md' : 'bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
+            {/* Logo - Text style like Aestoria */}
             <button
               onClick={() => scrollToSection('#home')}
-              className="relative h-10 w-40 cursor-pointer"
+              className={`text-xl font-medium tracking-tight transition-colors ${
+                isScrolled ? 'text-dark' : 'text-white'
+              }`}
             >
-              <Image
-                src="/logo.png"
-                alt="Maprotech Construction"
-                fill
-                className="object-contain object-left"
-                priority
-              />
+              Maprotech
             </button>
 
             {/* Menu Button */}
             <button
               onClick={() => setIsMenuOpen(true)}
-              className={`p-2 rounded-full transition-colors ${
+              className={`p-2 rounded-lg transition-colors ${
                 isScrolled ? 'text-dark hover:bg-gray-100' : 'text-white hover:bg-white/10'
               }`}
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-6 h-6" strokeWidth={1.5} />
             </button>
           </div>
         </div>
@@ -77,40 +72,35 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-dark"
+            className="fixed inset-0 z-50 bg-[#1a1a1a]"
           >
-            <div className="container mx-auto px-6 lg:px-8 h-full flex flex-col">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-full flex flex-col">
               {/* Menu Header */}
               <div className="flex items-center justify-between h-20">
-                <div className="relative h-10 w-40">
-                  <Image
-                    src="/logo-white.png"
-                    alt="Maprotech Construction"
-                    fill
-                    className="object-contain object-left"
-                  />
-                </div>
+                <span className="text-xl font-medium tracking-tight text-white">
+                  Maprotech
+                </span>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                  className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6" strokeWidth={1.5} />
                 </button>
               </div>
 
               {/* Menu Links */}
               <nav className="flex-1 flex flex-col justify-center">
-                <ul className="space-y-4">
+                <ul className="space-y-2">
                   {navLinks.map((link, index) => (
                     <motion.li
                       key={link.name}
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.08, duration: 0.4 }}
                     >
                       <button
                         onClick={() => scrollToSection(link.href)}
-                        className="text-4xl md:text-6xl font-medium text-white hover:text-gray-400 transition-colors"
+                        className="text-5xl md:text-7xl font-medium text-white/90 hover:text-white transition-colors py-2"
                       >
                         {link.name}
                       </button>
@@ -121,13 +111,35 @@ export default function Header() {
 
               {/* Menu Footer */}
               <div className="py-8 border-t border-white/10">
-                <p className="text-gray-400 text-sm">Get in touch</p>
-                <a
-                  href="tel:+13467430784"
-                  className="text-white text-lg hover:text-gray-300 transition-colors"
-                >
-                  +1 (346) 743-0784
-                </a>
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div>
+                    <p className="text-gray-500 text-sm">Get in touch</p>
+                    <a
+                      href="tel:+13467430784"
+                      className="text-white text-lg hover:text-gray-300 transition-colors"
+                    >
+                      +1 (346) 743-0784
+                    </a>
+                  </div>
+                  <div className="flex gap-4">
+                    <a
+                      href="https://www.facebook.com/Maprotechconstructionllc"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Facebook
+                    </a>
+                    <a
+                      href="https://wa.link/eidv05"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      WhatsApp
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
