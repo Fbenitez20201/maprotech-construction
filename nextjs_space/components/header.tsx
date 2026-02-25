@@ -35,8 +35,10 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-white/95 backdrop-blur-md' : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled 
+            ? 'bg-white/70 backdrop-blur-xl shadow-sm' 
+            : 'bg-transparent'
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -44,8 +46,8 @@ export default function Header() {
             {/* Logo - Text style like Aestoria */}
             <button
               onClick={() => scrollToSection('#home')}
-              className={`text-xl font-medium tracking-tight transition-colors ${
-                isScrolled ? 'text-dark' : 'text-white'
+              className={`text-xl font-medium tracking-tight transition-colors duration-300 ${
+                isScrolled ? 'text-[#1a1a1a]' : 'text-white'
               }`}
             >
               Maprotech
@@ -54,8 +56,10 @@ export default function Header() {
             {/* Menu Button */}
             <button
               onClick={() => setIsMenuOpen(true)}
-              className={`p-2 rounded-lg transition-colors ${
-                isScrolled ? 'text-dark hover:bg-gray-100' : 'text-white hover:bg-white/10'
+              className={`p-2 rounded-lg transition-colors duration-300 ${
+                isScrolled 
+                  ? 'text-[#1a1a1a] hover:bg-black/5' 
+                  : 'text-white hover:bg-white/10'
               }`}
             >
               <Menu className="w-6 h-6" strokeWidth={1.5} />

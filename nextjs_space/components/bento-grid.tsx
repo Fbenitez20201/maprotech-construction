@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
-import { Star } from 'lucide-react';
+import { Star, Plus } from 'lucide-react';
 
 export default function BentoGrid() {
   const [ref, inView] = useInView({
@@ -99,30 +99,37 @@ export default function BentoGrid() {
             />
           </motion.div>
 
-          {/* Feature Card 01 */}
+          {/* Feature Card 01 - with image */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-white rounded-[20px] p-5 flex flex-col justify-between min-h-[260px]"
+            className="relative rounded-[20px] overflow-hidden min-h-[260px] group"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[#ccc] text-xs">01</span>
-              <div className="w-5 h-5 text-[#ccc]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
+            <Image
+              src="/images/features/detail_work.png"
+              alt="Meticulous detail"
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute inset-0 p-5 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-white/60 text-xs">01</span>
+                <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
+                  <Plus className="w-4 h-4 text-white/60" />
+                </div>
               </div>
-            </div>
-            <div>
-              <h4 className="text-[#1a1a1a] font-medium text-base mb-2">Meticulous detail</h4>
-              <p className="text-[#888] text-[12px] leading-relaxed">
-                We've delivered 50+ projects that help companies generate real results.
-              </p>
+              <div>
+                <h4 className="text-white font-medium text-base mb-2">Meticulous detail</h4>
+                <p className="text-white/70 text-[12px] leading-relaxed">
+                  We've delivered 50+ projects that help companies generate real results.
+                </p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Image Card 2 */}
+          {/* Image Card 2 - updated bathroom */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -130,7 +137,7 @@ export default function BentoGrid() {
             className="relative rounded-[20px] overflow-hidden min-h-[260px]"
           >
             <Image
-              src="/images/projects/bathroom.jpg"
+              src="/images/features/bathroom_reno.png"
               alt="Elegant bathroom"
               fill
               className="object-cover"
@@ -138,26 +145,33 @@ export default function BentoGrid() {
           </motion.div>
 
           {/* Row 2 */}
-          {/* Feature Card 02 */}
+          {/* Feature Card 02 - with image */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-white rounded-[20px] p-5 flex flex-col justify-between min-h-[260px]"
+            className="relative rounded-[20px] overflow-hidden min-h-[260px] group"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[#ccc] text-xs">02</span>
-              <div className="w-5 h-5 text-[#ccc]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
+            <Image
+              src="/images/features/sustainable_build.png"
+              alt="Sustainable by Nature"
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute inset-0 p-5 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-white/60 text-xs">02</span>
+                <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
+                  <Plus className="w-4 h-4 text-white/60" />
+                </div>
               </div>
-            </div>
-            <div>
-              <h4 className="text-[#1a1a1a] font-medium text-base mb-2">Sustainable by Nature</h4>
-              <p className="text-[#888] text-[12px] leading-relaxed">
-                We've delivered 50+ projects that help companies generate real results.
-              </p>
+              <div>
+                <h4 className="text-white font-medium text-base mb-2">Sustainable by Nature</h4>
+                <p className="text-white/70 text-[12px] leading-relaxed">
+                  Eco-friendly building practices and materials for a better future.
+                </p>
+              </div>
             </div>
           </motion.div>
 
@@ -169,33 +183,40 @@ export default function BentoGrid() {
             className="relative rounded-[20px] overflow-hidden min-h-[260px] md:col-span-2"
           >
             <Image
-              src="/images/projects/kitchen1.jpg"
-              alt="Kitchen project"
+              src="/images/features/living_space.png"
+              alt="Beautiful living space"
               fill
               className="object-cover"
             />
           </motion.div>
 
-          {/* Feature Card 03 */}
+          {/* Feature Card 03 - with image */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="bg-white rounded-[20px] p-5 flex flex-col justify-between min-h-[260px]"
+            className="relative rounded-[20px] overflow-hidden min-h-[260px] group"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[#ccc] text-xs">03</span>
-              <div className="w-5 h-5 text-[#ccc]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
+            <Image
+              src="/images/features/team_work.png"
+              alt="Beauty with purpose"
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute inset-0 p-5 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-white/60 text-xs">03</span>
+                <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
+                  <Plus className="w-4 h-4 text-white/60" />
+                </div>
               </div>
-            </div>
-            <div>
-              <h4 className="text-[#1a1a1a] font-medium text-base mb-2">Beauty with purpose</h4>
-              <p className="text-[#888] text-[12px] leading-relaxed">
-                We've delivered 50+ projects that help companies generate real results.
-              </p>
+              <div>
+                <h4 className="text-white font-medium text-base mb-2">Beauty with purpose</h4>
+                <p className="text-white/70 text-[12px] leading-relaxed">
+                  Expert craftsmanship that combines aesthetics with functionality.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
