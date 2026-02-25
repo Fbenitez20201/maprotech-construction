@@ -36,12 +36,14 @@ const translations: Translations = {
   'bento.feature2.desc': { en: 'Eco-friendly building practices and materials for a better future.', es: 'Prácticas y materiales de construcción ecológicos para un futuro mejor.' },
   'bento.feature3.title': { en: 'Beauty with purpose', es: 'Belleza con propósito' },
   'bento.feature3.desc': { en: 'Expert craftsmanship that combines aesthetics with functionality.', es: 'Artesanía experta que combina estética con funcionalidad.' },
+  'bento.testimonial': { en: 'We needed a complete kitchen renovation, and Maprotech delivered beyond our expectations. The attention to detail and professionalism was outstanding.', es: 'Necesitábamos una renovación completa de cocina, y Maprotech superó nuestras expectativas. La atención al detalle y profesionalismo fue excepcional.' },
+  'bento.testimonialRole': { en: 'Homeowner', es: 'Propietaria' },
   
   // Stats
-  'stats.impressions': { en: 'Ad impressions managed', es: 'Impresiones publicitarias gestionadas' },
-  'stats.projects': { en: 'Successful projects launched', es: 'Proyectos exitosos lanzados' },
-  'stats.satisfaction': { en: 'Client satisfaction rate', es: 'Tasa de satisfacción del cliente' },
-  'stats.traffic': { en: 'Monthly website driven through SEO', es: 'Tráfico mensual web impulsado por SEO' },
+  'stats.projects': { en: 'Projects Completed', es: 'Proyectos Completados' },
+  'stats.years': { en: 'Years of Experience', es: 'Años de Experiencia' },
+  'stats.satisfaction': { en: 'Client Satisfaction', es: 'Satisfacción del Cliente' },
+  'stats.clients': { en: 'Happy Clients', es: 'Clientes Satisfechos' },
   
   // Projects
   'projects.title': { en: 'Our projects', es: 'Nuestros proyectos' },

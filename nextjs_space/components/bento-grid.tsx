@@ -62,7 +62,7 @@ export default function BentoGrid() {
                 ))}
               </div>
               <p className="text-[#444] text-[13px] leading-relaxed">
-                We needed a full rebranding, and this agency delivered beyond our expectations. From the new logo to the website design, everything feels cohesive and professional.
+                {t('bento.testimonial')}
               </p>
             </div>
             <div className="flex items-center gap-3 mt-4">
@@ -74,8 +74,8 @@ export default function BentoGrid() {
                 }}
               />
               <div>
-                <p className="text-[13px] font-medium text-[#1a1a1a]">Lena M</p>
-                <p className="text-[11px] text-[#888]">Retreat Owner</p>
+                <p className="text-[13px] font-medium text-[#1a1a1a]">María G.</p>
+                <p className="text-[11px] text-[#888]">{t('bento.testimonialRole')}</p>
               </div>
             </div>
           </motion.div>

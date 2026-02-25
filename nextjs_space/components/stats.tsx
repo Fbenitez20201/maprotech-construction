@@ -38,10 +38,10 @@ export default function Stats() {
   const { t } = useI18n();
 
   const stats = [
-    { value: 2500000, suffix: '+', label: t('stats.impressions') },
-    { value: 50, suffix: '+', label: t('stats.projects') },
-    { value: 99, suffix: '%', label: t('stats.satisfaction') },
-    { value: 10000, suffix: '+', label: t('stats.traffic') },
+    { value: 150, suffix: '+', label: t('stats.projects') },
+    { value: 15, suffix: '+', label: t('stats.years') },
+    { value: 98, suffix: '%', label: t('stats.satisfaction') },
+    { value: 500, suffix: '+', label: t('stats.clients') },
   ];
 
   return (
