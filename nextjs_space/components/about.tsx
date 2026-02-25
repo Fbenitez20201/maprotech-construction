@@ -2,44 +2,22 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Target, Heart, Lightbulb, Users } from 'lucide-react';
-
-const values = [
-  {
-    number: '01',
-    icon: Target,
-    title: 'Meticulous Detail',
-    description: 'Every project receives our full attention to detail, ensuring flawless execution from start to finish.',
-  },
-  {
-    number: '02',
-    icon: Heart,
-    title: 'Client Focused',
-    description: 'Your vision drives our work. We listen, adapt, and deliver results that exceed expectations.',
-  },
-  {
-    number: '03',
-    icon: Lightbulb,
-    title: 'Innovative Solutions',
-    description: 'We combine traditional craftsmanship with modern techniques for optimal results.',
-  },
-];
 
 const team = [
   {
     name: 'Juan Cerna',
-    role: 'Founder & CEO',
-    description: 'With over 15 years of experience in construction, Juan leads our team with passion and expertise.',
+    role: 'Founder & Lead Contractor',
+    image: 'https://randomuser.me/api/portraits/men/32.jpg',
   },
   {
     name: 'Yanira Arevalo',
-    role: 'Co-founder & Co-owner',
-    description: 'Yanira brings creative vision and business acumen to every project we undertake.',
+    role: 'Project Manager',
+    image: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
     name: 'Sam Amaya',
-    role: 'Project Manager',
-    description: 'Sam ensures smooth project execution and maintains our high standards of communication.',
+    role: 'Senior Craftsman',
+    image: 'https://randomuser.me/api/portraits/men/67.jpg',
   },
 ];
 
@@ -50,101 +28,76 @@ export default function About() {
   });
 
   return (
-    <section id="about" className="py-24 bg-cream section-light">
-      <div className="max-w-[1200px] mx-auto px-6">
-        {/* Values Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <div className="accent-line mx-auto" />
-          <h2 className="text-4xl md:text-5xl font-bold text-dark mb-4">
-            Design That Speaks
-          </h2>
-          <p className="text-dark/60 text-lg max-w-2xl mx-auto">
-            From quiet corners to bold statements — construction that connects. We transform ideas into beautiful, livable realities.
-          </p>
-        </motion.div>
-
-        {/* Values Grid */}
-        <motion.div
-          ref={ref}
-          className="grid md:grid-cols-3 gap-8 mb-24"
-        >
-          {values?.map?.((value, index) => {
-            const IconComponent = value?.icon;
-            return (
-              <motion.div
-                key={value?.title ?? index}
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="relative bg-white rounded-2xl p-8 shadow-sm card-hover"
-              >
-                <span className="absolute top-6 right-6 text-6xl font-bold text-accent/10">
-                  {value?.number ?? ''}
-                </span>
-                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
-                  {IconComponent && (
-                    <IconComponent className="w-7 h-7 text-accent" />
-                  )}
-                </div>
-                <h3 className="text-xl font-bold text-dark mb-3">
-                  {value?.title ?? ''}
-                </h3>
-                <p className="text-dark/60 text-sm leading-relaxed">
-                  {value?.description ?? ''}
-                </p>
-              </motion.div>
-            );
-          }) ?? []}
-        </motion.div>
-
-        {/* Team Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <div className="accent-line mx-auto" />
-          <h2 className="text-4xl md:text-5xl font-bold text-dark mb-4">
-            Meet the Team
-          </h2>
-          <p className="text-dark/60 text-lg max-w-2xl mx-auto">
-            Exceptional construction is a team effort. Meet the people behind the process.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {team?.map?.((member, index) => (
-            <motion.div
-              key={member?.name ?? index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-8 text-center shadow-sm card-hover"
-            >
-              <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
-                <Users className="w-10 h-10 text-accent" />
-              </div>
-              <h3 className="text-xl font-bold text-dark mb-1">
-                {member?.name ?? ''}
-              </h3>
-              <p className="text-accent font-medium text-sm mb-4">
-                {member?.role ?? ''}
-              </p>
-              <p className="text-dark/60 text-sm">
-                {member?.description ?? ''}
-              </p>
-            </motion.div>
-          )) ?? []}
+    <section id="about" ref={ref} className="section bg-gray-50">
+      <div className="container">
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="heading-lg text-dark"
+          >
+            Meet the people behind<br />the process
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-body max-w-md"
+          >
+            Exceptional construction is a team effort. We collaborate closely to bring thoughtful results that not only meet but exceed your expectations.
+          </motion.p>
         </div>
+
+        {/* Team Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {team.map((member, index) => (
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+              className="group"
+            >
+              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-4">
+                <div
+                  className="absolute inset-0 bg-gray-200 transition-transform duration-500 group-hover:scale-105"
+                  style={{
+                    backgroundImage: `url(${member.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+              </div>
+              <h3 className="text-lg font-medium text-dark">{member.name}</h3>
+              <p className="text-gray-500 text-sm">{member.role}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-16 flex flex-col md:flex-row md:items-center md:justify-between gap-6 p-8 bg-white rounded-3xl"
+        >
+          <div>
+            <h3 className="text-xl font-medium text-dark mb-2">Join us in building better spaces</h3>
+            <p className="text-gray-500">Ready to build something meaningful together? Let's connect and turn ideas into impactful construction.</p>
+          </div>
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="btn-primary whitespace-nowrap"
+          >
+            Join us now
+          </a>
+        </motion.div>
       </div>
     </section>
   );

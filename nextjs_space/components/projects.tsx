@@ -3,37 +3,41 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
-import { ArrowUpRight, Calendar } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const projects = [
   {
-    title: 'Modern Kitchen Renovation',
-    category: 'Kitchen',
-    description: 'Complete kitchen transformation with custom cabinetry, quartz countertops, and modern appliances.',
-    image: '/images/kitchen-wide.jpg',
-    date: 'Jan 2026',
+    title: 'Modern Kitchen',
+    date: 'Feb 2026',
+    image: '/images/projects/kitchen2.jpg',
+    category: 'Remodeling',
   },
   {
-    title: 'Luxury Bathroom Design',
-    category: 'Bathroom',
-    description: 'Spa-inspired bathroom featuring premium fixtures, custom tilework, and elegant finishes.',
-    image: '/images/bathroom.jpg',
-    date: 'Dec 2025',
+    title: 'Elegant Bathroom',
+    date: 'Jan 2026',
+    image: '/images/projects/bathroom.jpg',
+    category: 'Tile Work',
   },
   {
     title: 'Contemporary Kitchen',
-    category: 'Kitchen',
-    description: 'Sleek contemporary design with state-of-the-art appliances and innovative storage solutions.',
-    image: '/images/kitchen-fridge.jpg',
-    date: 'Nov 2025',
+    date: 'Dec 2025',
+    image: '/images/projects/kitchen1.jpg',
+    category: 'Renovation',
   },
   {
-    title: 'Classic Kitchen Remodel',
-    category: 'Kitchen',
-    description: 'Timeless kitchen design blending traditional elegance with modern functionality.',
-    image: '/images/kitchen.jpg',
-    date: 'Oct 2025',
+    title: 'Classic Kitchen Design',
+    date: 'Nov 2025',
+    image: '/images/projects/kitchen3.jpg',
+    category: 'Remodeling',
   },
+];
+
+const clientLogos = [
+  'Quality First',
+  'HomeStyle',
+  'Premier Build',
+  'Urban Living',
+  'Modern Spaces',
 ];
 
 export default function Projects() {
@@ -43,110 +47,80 @@ export default function Projects() {
   });
 
   return (
-    <section id="projects" className="py-24 bg-dark">
-      <div className="max-w-[1200px] mx-auto px-6">
-        {/* Section Header */}
+    <section id="projects" ref={ref} className="section bg-white">
+      <div className="container">
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="heading-lg text-dark"
+          >
+            Our projects
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-body max-w-md"
+          >
+            Each project is a reflection of our construction philosophy—intentional, durable, and tailored.
+          </motion.p>
+        </div>
+
+        {/* Client Logos Marquee */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex items-center gap-8 mb-12 overflow-x-auto pb-4 scroll-container"
         >
-          <div className="accent-line" />
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Our Projects
-              </h2>
-              <p className="text-white/60 text-lg max-w-xl">
-                Each project is intentional, timeless, and tailored. Showcasing our craftsmanship and innovation in construction.
-              </p>
-            </div>
-            <p className="text-accent font-semibold">
-              100+ Projects Completed
-            </p>
-          </div>
+          {[...clientLogos, ...clientLogos].map((logo, index) => (
+            <span
+              key={index}
+              className="text-gray-400 font-medium whitespace-nowrap text-sm"
+            >
+              {logo}
+            </span>
+          ))}
         </motion.div>
 
         {/* Projects Grid */}
-        <motion.div
-          ref={ref}
-          className="grid md:grid-cols-2 gap-8"
-        >
-          {projects?.map?.((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.map((project, index) => (
             <motion.div
-              key={project?.title ?? index}
-              initial={{ opacity: 0, y: 50 }}
+              key={project.title}
+              initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="group bg-dark-secondary rounded-2xl overflow-hidden card-hover"
+              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+              className="group cursor-pointer"
             >
-              {/* Image Container */}
-              <div className="relative aspect-[16/10] overflow-hidden">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden mb-4 img-hover-zoom">
                 <Image
-                  src={project?.image ?? ''}
-                  alt={project?.title ?? 'Project'}
+                  src={project.image}
+                  alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-secondary via-transparent to-transparent" />
-                
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4 px-4 py-2 bg-accent/90 rounded-full text-white text-sm font-medium">
-                  {project?.category ?? ''}
+                <div className="absolute top-4 left-4">
+                  <span className="bg-white/90 backdrop-blur-sm text-dark text-xs font-medium px-3 py-1.5 rounded-full">
+                    {project.date}
+                  </span>
                 </div>
-
-                {/* Arrow Icon */}
-                <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowUpRight className="w-5 h-5 text-white" />
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <ArrowRight className="w-4 h-4 text-dark" />
+                  </div>
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-accent transition-colors">
-                  {project?.title ?? ''}
-                </h3>
-                <p className="text-white/60 text-sm mb-4 line-clamp-2">
-                  {project?.description ?? ''}
-                </p>
-                <div className="flex items-center gap-2 text-white/40 text-sm">
-                  <Calendar className="w-4 h-4" />
-                  <span>{project?.date ?? ''}</span>
-                </div>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-medium text-dark">{project.title}</h3>
+                <span className="text-gray-400 text-sm">{project.category}</span>
               </div>
             </motion.div>
-          )) ?? []}
-        </motion.div>
-
-        {/* Video Showcase */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-12"
-        >
-          <div className="relative rounded-2xl overflow-hidden aspect-video bg-dark-secondary">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-            >
-              <source src="/images/project-video.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
-            <div className="absolute bottom-6 left-6">
-              <span className="px-4 py-2 bg-accent rounded-full text-white text-sm font-medium">
-                Latest Project
-              </span>
-              <h3 className="text-2xl font-bold text-white mt-3">Watch Our Work in Action</h3>
-            </div>
-          </div>
-        </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

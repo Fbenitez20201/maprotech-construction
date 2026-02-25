@@ -1,21 +1,29 @@
 import Header from '@/components/header';
 import Hero from '@/components/hero';
-import Services from '@/components/services';
+import BentoGrid from '@/components/bento-grid';
+import Stats from '@/components/stats';
 import Projects from '@/components/projects';
-import About from '@/components/about';
+import Services from '@/components/services';
+import VideoSection from '@/components/video-section';
 import Testimonials from '@/components/testimonials';
+import FAQ from '@/components/faq';
+import About from '@/components/about';
 import Contact from '@/components/contact';
 import Footer from '@/components/footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main>
       <Header />
       <Hero />
-      <Services />
+      <BentoGrid />
+      <Stats />
       <Projects />
-      <About />
+      <Services />
+      <VideoSection />
       <Testimonials />
+      <FAQ />
+      <About />
       <Contact />
       <Footer />
     </main>
